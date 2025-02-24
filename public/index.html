@@ -22,6 +22,32 @@
             notificationsList.appendChild(notificationItem);
         });
     </script>
+
+    <script>
+        // native websockets
+        const ws = new WebSocket('ws://localhost:3000');
+
+        ws.onopen = () => {
+            console.log('Connected to WebSocket server');
+        };
+
+        ws.onmessage = (message) => {
+            const notificationsList = document.getElementById('notifications');
+            const notificationItem = document.createElement('li');
+            notificationItem.textContent = message.data;
+            notificationsList.appendChild(notificationItem);
+        };
+
+        ws.onclose = () => {
+            console.log('Disconnected from WebSocket server');
+        };
+
+        ws.onerror = (error) => {
+            console.error(`WebSocket error: ${error}`);
+        };
+
+
+    </script>
 </body>
 
 </html>
